@@ -45,6 +45,7 @@ export default (state = list, action) => {
         let temp = Object.assign({}, item);
         if (item.category === payload) {
           temp.active = true;
+
           return temp;
         } else {
           temp.active = false;
@@ -52,6 +53,23 @@ export default (state = list, action) => {
         }
       });
       return items;
+
+    case "ADD_TO_CART":
+      return state.map((item) => {
+        if (item.name === payload.name) {
+          return {
+            name: item.name,
+            category: item.category,
+            description: item.description,
+            img: item.img,
+            price: item.price,
+            active: item.active,
+            inventory: item.inventory - 1,
+          };
+        }
+        return item;
+      });
+
     default:
       return state;
   }
@@ -61,5 +79,12 @@ export const isActive = (category) => {
   return {
     type: "CHANGE_ACTIVE",
     payload: category,
+  };
+};
+
+export const addCart = (item) => {
+  return {
+    type: "ADD_TO_CART",
+    payload: item,
   };
 };
