@@ -9,7 +9,7 @@ import Link from "@material-ui/core/Link";
 
 const Categories = (props) => {
   return (
-    <section>
+    <section className='category'>
       <Breadcrumbs>
         {props.category.map((cat) => {
           return (
