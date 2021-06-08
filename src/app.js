@@ -12,6 +12,7 @@ function App() {
   return (
     <>
       <Header />
+
       <Categories />
       <Container maxWidth="md">
         <Products />
