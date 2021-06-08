@@ -1,0 +1,22 @@
+body{
+    font-family: $font-primary;
+    color: $primary-color;
+}
+
+.category{
+    margin:$gutter-sm;
+    font-size: $gutter-sm;
+}
+
+.active-category{
+    text-align: center;
+    height: 20vh;
+
+    .cat-title{
+        margin-top:$gutter-lg;
+    }
+    .cat-desc{
+        margin-top: $gutter-sm;
+        font-size: 1.5vw;
+    }
+}

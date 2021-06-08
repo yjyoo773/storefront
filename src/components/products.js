@@ -28,14 +28,10 @@ const Products = (props) => {
   return (
     <section>
       {active.length > 0 ? (
-        <Card>
-          <CardContent>
-            <Typography variant="h5">{active[0].name.toUpperCase()}</Typography>
-            <Typography color="textSecondary">
-              {active[0].description}
-            </Typography>
-          </CardContent>
-        </Card>
+        <div className='active-category'>
+          <Typography className='cat-title' variant='h3'>{active[0].name.toUpperCase()}</Typography>
+          <p className='cat-desc'>{active[0].description}</p>
+        </div>
       ) : (
         ""
       )}
