@@ -70,6 +70,21 @@ export default (state = list, action) => {
         return item;
       });
 
+    case "REMOVE_FROM_CART":
+      return state.map((item) => {
+        if (item.name === payload.name) {
+          return {
+            name: item.name,
+            category: item.category,
+            description: item.description,
+            img: item.img,
+            price: item.price,
+            active: item.active,
+            inventory: item.inventory + 1,
+          };
+        }
+        return item;
+      });
     default:
       return state;
   }
@@ -85,6 +100,14 @@ export const isActive = (category) => {
 export const addCart = (item) => {
   return {
     type: "ADD_TO_CART",
+    payload: item,
+  };
+};
+
+
+export const removeCart = (item) => {
+  return {
+    type: "REMOVE_FROM_CART",
     payload: item,
   };
 };
