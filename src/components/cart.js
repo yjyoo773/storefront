@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { removeCart } from "../store/cart.js";
+import { removeRemoteCart } from "../store/cart.js";
 
 import Badge from "@material-ui/core/Badge";
 import { withStyles } from "@material-ui/core/styles";
@@ -55,9 +55,9 @@ const Cart = (props) => {
       >
         {props.cart.map((item) => {
           return (
-            <MenuItem>
+            <MenuItem key={Math.random()}>
               {item.name}
-              <button onClick={()=>props.removeCart(item)}> delete </button>
+              <button onClick={()=>props.removeRemoteCart(item)}> delete </button>
             </MenuItem>
           );
         })}
@@ -70,6 +70,6 @@ const mapStateToProps = (state) => ({
   cart: state.theCart,
 });
 
-const mapDispatchToProps = { removeCart };
+const mapDispatchToProps = { removeRemoteCart };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Cart);

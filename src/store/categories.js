@@ -18,13 +18,17 @@ export default (state = initalCategories, action) => {
   switch (type) {
     case "CHANGE_ACTIVE":
       let categories = state.map((category) => {
-        let temp = Object.assign({}, category);
+        // let temp = Object.assign({}, category);
         if (category.name === payload) {
-          temp.active = true;
-          return temp;
+          // temp.active = true;
+          // return temp;
+          return {...category,active:true};
+
         } else {
-          temp.active = false;
-          return temp;
+          // temp.active = false;
+          // return temp;
+          return {...category,active:false};
+
         }
       });
       return categories;

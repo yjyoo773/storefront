@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addCart, isActive } from "../store/products.js";
+import { addCart, addRemoteCart } from "../store/products.js";
 
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -22,6 +22,8 @@ const useStyles = makeStyles({
 });
 
 const Products = (props) => {
+
+
   const classes = useStyles();
   let active = props.category.filter((cat) => {
     return cat.active === true;
@@ -40,7 +42,7 @@ const Products = (props) => {
       )}
       <ul>
         {props.products
-          .filter((item) => item.active)
+          .filter((item) => item.active && item.inventory > 0)
           .map((filteredItem) => {
             return (
               <Card className={classes.root} key={props.products.name}>
@@ -50,7 +52,9 @@ const Products = (props) => {
                   title={filteredItem.name}
                 />
                 <CardContent>
-                  <Typography variant="h6">{filteredItem.name.toUpperCase()}</Typography>
+                  <Typography variant="h6">
+                    {filteredItem.name.toUpperCase()}
+                  </Typography>
                   <Typography>{filteredItem.description}</Typography>
                   <Typography>$ {filteredItem.price}</Typography>
                   <Typography>{filteredItem.inventory} Remaining!</Typography>
@@ -58,7 +62,7 @@ const Products = (props) => {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => props.addCart(filteredItem)}
+                    onClick={() => props.addRemoteCart(filteredItem)}
                   >
                     add to cart
                   </Button>
@@ -76,6 +80,6 @@ const mapStateToProps = (state) => ({
   products: state.activeItem,
 });
 
-const mapDispatchToProps = { addCart, isActive };
+const mapDispatchToProps = { addCart, addRemoteCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
