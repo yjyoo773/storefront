@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
+import { removeCart } from "../store/cart.js";
+
 import Badge from "@material-ui/core/Badge";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
@@ -42,20 +44,20 @@ const Cart = (props) => {
         keepMounted
         open={Boolean(anchorEl)}
         anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
+        //   vertical: "bottom",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
         onClose={handleClose}
       >
         {props.cart.map((item) => {
           return (
             <MenuItem>
               {item.name}
-              {/* <button> delete </button> */}
+              <button onClick={()=>props.removeCart(item)}> delete </button>
             </MenuItem>
           );
         })}
@@ -68,4 +70,6 @@ const mapStateToProps = (state) => ({
   cart: state.theCart,
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = { removeCart };
+
+export default connect(mapStateToProps,mapDispatchToProps)(Cart);
