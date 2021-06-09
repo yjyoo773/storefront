@@ -71,20 +71,20 @@ export default (state = list, action) => {
       });
 
     case "REMOVE_FROM_CART":
-      // return state.map((item) => {
-      //   if (item.name === payload.name) {
-      //     return {
-      //       name: item.name,
-      //       category: item.category,
-      //       description: item.description,
-      //       img: item.img,
-      //       price: item.price,
-      //       active: item.active,
-      //       inventory: item.inventory + 1,
-      //     };
-      //   }
-      //   return item;
-      // });
+      return state.map((item) => {
+        if (item.name === payload.name) {
+          return {
+            name: item.name,
+            category: item.category,
+            description: item.description,
+            img: item.img,
+            price: item.price,
+            active: item.active,
+            inventory: item.inventory + 1,
+          };
+        }
+        return item;
+      });
     default:
       return state;
   }
