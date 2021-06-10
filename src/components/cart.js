@@ -65,7 +65,6 @@ const Cart = (props) => {
                 />
               </ListItemIcon>
               <ListItemText primary={item.name} />
-              {/* <span className='cart-product-name'>{item.name}</span> */}
             </MenuItem>
           );
         })}

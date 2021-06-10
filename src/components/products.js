@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addCart, addRemoteCart } from "../store/products.js";
+import { addRemoteCart } from "../store/products.js";
 
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -23,11 +23,11 @@ const useStyles = makeStyles({
 
 const Products = (props) => {
 
-
   const classes = useStyles();
   let active = props.category.filter((cat) => {
     return cat.active === true;
   });
+  
   return (
     <section>
       {active.length > 0 ? (
@@ -80,6 +80,6 @@ const mapStateToProps = (state) => ({
   products: state.activeItem,
 });
 
-const mapDispatchToProps = { addCart, addRemoteCart };
+const mapDispatchToProps = { addRemoteCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
