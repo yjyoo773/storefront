@@ -14,8 +14,8 @@ import "./styles/core.scss";
 function App(props) {
   const fetchData = (e) => {
     e && e.preventDefault();
-    props.getProducts();
-    props.getCategory();
+    props.getRemoteProducts();
+    props.getRemoteCategory();
   };
 
   React.useEffect(() => {
@@ -38,9 +38,6 @@ const mapStateToProps = (state) => ({
   products: state.activeItem,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getProducts: () => dispatch(getRemoteProducts()),
-  getCategory: () => dispatch(getRemoteCategory()),
-});
+const mapDispatchToProps = { getRemoteProducts, getRemoteCategory };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
