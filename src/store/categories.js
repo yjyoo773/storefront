@@ -2,7 +2,7 @@ import superagent from "superagent";
 
 let initalCategories = [];
 
-let api = "https://ellis-api-server.herokuapp.com//category/";
+let api = "https://ellis-api-server.herokuapp.com/category/";
 
 export default (state = initalCategories, action) => {
   let { type, payload } = action;
