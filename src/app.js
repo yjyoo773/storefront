@@ -6,19 +6,21 @@ import Products from "./components/products.js";
 import Footer from "./components/footer.js";
 import Container from "@material-ui/core/Container";
 
-import { getRemoteData } from "./store/products.js";
+import { getRemoteProducts } from "./store/products.js";
+import { getRemoteCategory } from "./store/categories.js";
 
 import "./styles/core.scss";
 
 function App(props) {
   const fetchData = (e) => {
     e && e.preventDefault();
-    props.get();
+    props.getProducts();
+    props.getCategory();
   };
 
-  React.useEffect(()=>{
-    fetchData()
-  },[])
+  React.useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -33,11 +35,12 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.activeItem
+  products: state.activeItem,
 });
 
-const mapDispatchToProps = (dispatch, getState) => ({
-  get: () => dispatch(getRemoteData()),
+const mapDispatchToProps = (dispatch) => ({
+  getProducts: () => dispatch(getRemoteProducts()),
+  getCategory: () => dispatch(getRemoteCategory()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

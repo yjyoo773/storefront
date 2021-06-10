@@ -1,34 +1,23 @@
-let initalCategories = [
-  {
-    name: "food",
-    displayName: "food",
-    description: "something",
-    active: false,
-  },
-  {
-    name: "electronics",
-    displayName: "electronics",
-    description: "something",
-    active: false,
-  },
-];
+import superagent from "superagent";
+
+let initalCategories = [];
+
+let api = "https://ellis-api-server.herokuapp.com//category/";
 
 export default (state = initalCategories, action) => {
   let { type, payload } = action;
   switch (type) {
+
+    case "GET_CATEGORY":
+      return payload
+
     case "CHANGE_ACTIVE":
       let categories = state.map((category) => {
-        // let temp = Object.assign({}, category);
         if (category.name === payload) {
-          // temp.active = true;
-          // return temp;
-          return {...category,active:true};
 
+          return { ...category, active: true };
         } else {
-          // temp.active = false;
-          // return temp;
-          return {...category,active:false};
-
+          return { ...category, active: false };
         }
       });
       return categories;
@@ -43,4 +32,17 @@ export const changeActive = (name) => {
     type: "CHANGE_ACTIVE",
     payload: name,
   };
+};
+
+export const getCategory = (data) => {
+  return {
+    type: "GET_CATEGORY",
+    payload: data,
+  };
+};
+
+export const getRemoteCategory = () => (dispatch) => {
+  return superagent.get(api).then((res) => {
+    dispatch(getCategory(res.body));
+  });
 };

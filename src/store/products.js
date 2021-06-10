@@ -2,7 +2,7 @@ import superagent from "superagent";
 
 let list = [];
 
-let api = "http://localhost:3333/product";
+let api = "https://ellis-api-server.herokuapp.com//product";
 
 export default (state = list, action) => {
   let { type, payload } = action;
@@ -68,7 +68,7 @@ export const removeCart = (item) => {
   };
 };
 
-export const getRemoteData = () => (dispatch) => {
+export const getRemoteProducts = () => (dispatch) => {
   return superagent.get(api).then((res) => {
     dispatch(getProducts(res.body));
   });
