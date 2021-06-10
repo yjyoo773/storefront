@@ -7,6 +7,9 @@ import Badge from "@material-ui/core/Badge";
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -44,11 +47,11 @@ const Cart = (props) => {
         keepMounted
         open={Boolean(anchorEl)}
         anchorOrigin={{
-        //   vertical: "bottom",
+          vertical: "top",
           horizontal: "left",
         }}
         transformOrigin={{
-          vertical: "top",
+          vertical: "bottom",
           horizontal: "right",
         }}
         onClose={handleClose}
@@ -56,8 +59,13 @@ const Cart = (props) => {
         {props.cart.map((item) => {
           return (
             <MenuItem key={Math.random()}>
-              {item.name}
-              <button onClick={()=>props.removeRemoteCart(item)}> delete </button>
+              <ListItemIcon>
+                <DeleteOutlinedIcon
+                  onClick={() => props.removeRemoteCart(item)}
+                />
+              </ListItemIcon>
+              <ListItemText primary={item.name} />
+              {/* <span className='cart-product-name'>{item.name}</span> */}
             </MenuItem>
           );
         })}
@@ -72,4 +80,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { removeRemoteCart };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

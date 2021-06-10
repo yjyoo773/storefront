@@ -68,7 +68,7 @@ export const removeCart = (item) => {
   };
 };
 
-export const getRemoteData = () => (dispatch) => {
+export const getRemoteProducts = () => (dispatch) => {
   return superagent.get(api).then((res) => {
     dispatch(getProducts(res.body));
   });
