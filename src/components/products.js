@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
+
 import { addRemoteCart } from "../store/products.js";
 
 import Button from "@material-ui/core/Button";
@@ -17,17 +19,16 @@ const useStyles = makeStyles({
     width: "25vw",
   },
   media: {
-    height: 140,
+    height: 200,
   },
 });
 
 const Products = (props) => {
-
   const classes = useStyles();
   let active = props.category.filter((cat) => {
     return cat.active === true;
   });
-  
+
   return (
     <section>
       {active.length > 0 ? (
@@ -56,16 +57,22 @@ const Products = (props) => {
                     {filteredItem.name.toUpperCase()}
                   </Typography>
                   <Typography>{filteredItem.description}</Typography>
-                  <Typography>$ {filteredItem.price}</Typography>
-                  <Typography>{filteredItem.inventory} Remaining!</Typography>
 
                   <Button
-                    variant="contained"
                     color="primary"
                     onClick={() => props.addRemoteCart(filteredItem)}
                   >
-                    add to cart
+                    Add to Cart
                   </Button>
+                  <Link
+                    to={{
+                      pathname: `/details/${filteredItem.name}`,
+                      state: filteredItem,
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Button color="primary">View Details</Button>
+                  </Link>
                 </CardContent>
               </Card>
             );
@@ -78,8 +85,11 @@ const Products = (props) => {
 const mapStateToProps = (state) => ({
   category: state.activeCat,
   products: state.activeItem,
+  cart: state.theCart,
 });
 
 const mapDispatchToProps = { addRemoteCart };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Products)
+);
